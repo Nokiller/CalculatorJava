@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
 
@@ -19,22 +20,19 @@ public class Main {
     }
 
     public static String calc(String input) throws IOException {
+        String[] validNumbers = new String[]{"1", "2", "3", "5", "6", "7", "8", "9", "10"};
+        String[] validSign = new String[]{"+", "-", "*", "/"};
+
         String[] split = input.split(" ");
 
-        int aNoLimit = Integer.parseInt(split[0]);
+        if (split.length != 3 || !Arrays.asList(validNumbers).contains(split[0])
+                || !Arrays.asList(validSign).contains(split[1])
+                || !Arrays.asList(validNumbers).contains(split[2]))
+            throw new InputUserException("Ошибка ввода данных! Калькулятор принимает на вход два числа от 1 до 10 включительно и один знак математической операции (+,-,*,/), расположенный между ними через пробел!");
+
+        int a = Integer.parseInt(split[0]);
         String sign = split[1];
-        int bNoLimit = Integer.parseInt(split[2]);
-
-        int a = 0;
-        int b = 0;
-
-        if ((aNoLimit <= 10 && aNoLimit >= 0) && (bNoLimit <= 10 && bNoLimit >= 0)) {
-            a = aNoLimit;
-            b = bNoLimit;
-        } else {
-            throw new IOException();
-        }
-
+        int b = Integer.parseInt(split[2]);
         int result = 0;
 
         switch (sign) {
@@ -50,12 +48,9 @@ public class Main {
             case "/":
                 result = a / b;
                 break;
-            default:
-                System.out.println("Ошибка ввода данных");
-                break;
         }
+
         return Integer.toString(result);
     }
-
 }
 
