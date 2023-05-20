@@ -19,7 +19,7 @@ public class Main {
         }
     }
 
-    public static String calc(String input) throws IOException {
+    public static String calc(String input) throws InputUserException {
         String[] validNumbers = new String[]{"1", "2", "3", "4" ,"5", "6", "7", "8", "9", "10"};
         String[] validSign = new String[]{"+", "-", "*", "/"};
 
